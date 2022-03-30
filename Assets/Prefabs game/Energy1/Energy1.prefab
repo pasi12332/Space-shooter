@@ -9790,7 +9790,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3636123097333896316}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14891,7 +14891,6 @@ MonoBehaviour:
   maxThrust: 100
   maxTorque: 100
   rb: {fileID: 5310879026353788767}
-  textDisplay: {fileID: 7859330511677853556, guid: 6a68be155805c1144b34e3648933c1d6, type: 3}
   scoreValue: 0
   gameController: {fileID: 0}
   player: {fileID: 0}
@@ -14903,6 +14902,10 @@ MonoBehaviour:
   - {fileID: 6953578463140140350, guid: b41fdf5d139ea774291f6ba7b817418f, type: 3}
   - {fileID: 5632538825624563929, guid: be2079a3eacf194449747462efb2b505, type: 3}
   quad: {fileID: 3636123097333896316}
+  partical: {fileID: 0}
+  animation: {fileID: 0}
+  astHP: 2
+  damage: 0
 --- !u!1 &8674472225446963631
 GameObject:
   m_ObjectHideFlags: 0

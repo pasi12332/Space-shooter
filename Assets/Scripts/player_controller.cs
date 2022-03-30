@@ -142,7 +142,7 @@ public class player_controller : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            delFuel(10);
+            delFuel(5);
         }
     }
 

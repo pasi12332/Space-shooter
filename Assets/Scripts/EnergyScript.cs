@@ -9,7 +9,6 @@ public class EnergyScript : MonoBehaviour
     public float maxThrust;
     public float maxTorque;
     public Rigidbody2D rb;
-    public TextMeshProUGUI textDisplay;
     public int scoreValue;
     public gameControll gameController;
     public player_controller player;
