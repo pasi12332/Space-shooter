@@ -762,8 +762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00002861, y: -312}
-  m_SizeDelta: {x: 251.9047, y: 69.4673}
+  m_AnchoredPosition: {x: 0.000022888, y: -312}
+  m_SizeDelta: {x: 452.8, y: 69.4673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &343639945
 MonoBehaviour:
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3048,6 +3048,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3c38836d46b588d48a15f5dbd2be96ba, type: 3}
   - {fileID: 21300000, guid: 36e6a7019e9dec94c93bb7e4bfc00f67, type: 3}
   - {fileID: 21300000, guid: eae028bb81d76f8418adf241f7c71b24, type: 3}
+  startLabel: {fileID: 343639945}
   playerskin: {fileID: 1927744246}
   skinShop: {fileID: 1806339055}
 --- !u!4 &1128718396

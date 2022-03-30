@@ -57,12 +57,29 @@ public class SkinManager : MonoBehaviour
         SpriteRenderer spriteR;
         spriteR = playerskin.gameObject.GetComponent<SpriteRenderer>();
         PlayerPrefs.SetString("Skin", "" + spriteR.sprite);
-        SceneManager.LoadScene("Single_Game");
+        LoadLevel(3);
     }
 
     public void Back()
     {
         PlayerPrefs.Save();
         SceneManager.LoadScene("Start");
+    }
+
+    public void LoadLevel(int sceneIndex)
+    {
+        StartCoroutine(LoadAsynchronously(sceneIndex));
+    }
+
+    IEnumerator LoadAsynchronously(int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            yield return null;
+        }
     }
 }
