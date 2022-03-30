@@ -13,7 +13,8 @@ public class EnergyScript : MonoBehaviour
     public gameControll gameController;
     public player_controller player;
     public int fuel;
-    public int numberToSpawn;
+    public int[] numbersToSpawn;
+    private int numberToSpawn;
     public List<GameObject> spawnpool;
     public GameObject quad;
 
@@ -28,7 +29,7 @@ public class EnergyScript : MonoBehaviour
         
         scoreValue = 10;
         fuel = 10;
-
+        numberToSpawn = Random.Range(numbersToSpawn[0], numbersToSpawn[1]);
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {

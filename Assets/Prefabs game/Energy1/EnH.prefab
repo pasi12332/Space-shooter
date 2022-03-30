@@ -19868,7 +19868,7 @@ MonoBehaviour:
   gameController: {fileID: 0}
   player: {fileID: 0}
   fuel: 0
-  numberToSpawn: 8
+  numbersToSpawn: 0600000008000000
   spawnpool:
   - {fileID: 5749905705611445338, guid: c11e0dd8b6829de4d9da126760c10854, type: 3}
   - {fileID: 4453294218234762780, guid: 4c9024db51ecc864490abb41abe7de10, type: 3}
