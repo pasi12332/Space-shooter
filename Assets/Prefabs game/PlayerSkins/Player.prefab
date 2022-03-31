@@ -238,8 +238,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   canvas: {fileID: 0}
   gameController: {fileID: 0}
-  AccelerationSpeed: 4
-  SteeringSpeed: 3.5
+  AccelerationSpeed: 1
+  SteeringSpeed: 0.5
   flame1: {fileID: 4902496170218014473}
   exp: {fileID: 0}
   Rigidbody: {fileID: 4902496168936042760}
@@ -250,6 +250,7 @@ MonoBehaviour:
   currentFuel: 0
   slider: {fileID: 0}
   playerSpeed: 0
+  cameraShake: {fileID: 0}
 --- !u!114 &1411713317136681058
 MonoBehaviour:
   m_ObjectHideFlags: 0

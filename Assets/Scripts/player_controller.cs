@@ -38,7 +38,13 @@ public class player_controller : MonoBehaviour
     public float currentFuel;
     public Slider slider;
 
-    public float playerSpeed;
+    float playerSpeed;
+
+    public float maxVelocity = 3f;
+
+    public float rotationSpeed = .5f;
+
+    public CameraShake cameraShake;
 
     PhotonView view;
 
@@ -50,6 +56,7 @@ public class player_controller : MonoBehaviour
         currentFuel = fuel;
         slider = GameObject.FindGameObjectWithTag("slider").GetComponent<Slider>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
 
         StartCoroutine(CalcSpeed());
     }
@@ -83,6 +90,8 @@ public class player_controller : MonoBehaviour
             _acceleration = Input.GetAxis("Vertical");
             _steering = Input.GetAxis("Horizontal");
             flame1.SetActive(_acceleration > 0.5);
+            ThrustForward(_acceleration * AccelerationSpeed);
+            Rotate(transform, _steering * -rotationSpeed);
             if(_acceleration > 0.5)
             {
                 currentFuel -= 2 * Time.deltaTime;
@@ -123,7 +132,7 @@ public class player_controller : MonoBehaviour
         currentFuel += fuel;
     }
 
-    public void delFuel(int fuel)
+    public void delFuel(float fuel)
     {
         currentFuel -= fuel;
     }
@@ -132,10 +141,29 @@ public class player_controller : MonoBehaviour
     {
         if (!dead)
         {
-            Rigidbody.AddRelativeForce(new Vector2(0, _acceleration * AccelerationSpeed));
-            Rigidbody.AddTorque(-_steering * SteeringSpeed);
+            //Rigidbody.AddRelativeForce(new Vector2(0, _acceleration * AccelerationSpeed));
+            //Rigidbody.AddTorque(-_steering * SteeringSpeed);
         }
         exp.transform.position = transform.position;
+    }
+
+    private void ClampVelocity()
+    {
+        float x = Mathf.Clamp(Rigidbody.velocity.x, -maxVelocity, maxVelocity);
+        float y = Mathf.Clamp(Rigidbody.velocity.y, -maxVelocity, maxVelocity);
+        Rigidbody.velocity = new Vector2(x, y);
+    }
+
+    private void ThrustForward(float amount)
+    {
+        Vector2 force = transform.up * amount;
+
+        Rigidbody.AddForce(force);
+    }
+
+    private void Rotate(Transform t, float amount)
+    {
+        t.Rotate(0, 0, amount);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -148,21 +176,14 @@ public class player_controller : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Obstacle"))
+        if (col.gameObject.CompareTag("Obstacle") || col.gameObject.CompareTag("Energy"))
         {
             if (!safeMode)
             {
-                isDead();
+                StartCoroutine(cameraShake.Shake(.15f, GetSpeed() / 25));
+                delFuel(GetSpeed());
             }
 
-        }
-
-        if (col.gameObject.CompareTag("Energy"))
-        {
-            if (!safeMode)
-            {
-                isDead();
-            }
         }
     }
 
