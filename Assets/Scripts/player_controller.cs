@@ -30,19 +30,22 @@ public class player_controller : MonoBehaviour
 
     public float radius;
 
+    //SafeMode Timer variables
     float currentTime = 0f;
     public float startTime = 5f;
     bool safeMode = true;
 
+    //fuel variables
     public float fuel = 100f;
     public float currentFuel;
-    public Slider slider;
+    public Slider fuelSlider;
+
+    //HP variables
+    public float HP = 100f;
+    public float currentHP;
+    public Slider hpSlider;
 
     float playerSpeed;
-
-    public float maxVelocity = 3f;
-
-    public float rotationSpeed = .5f;
 
     public CameraShake cameraShake;
 
@@ -54,7 +57,9 @@ public class player_controller : MonoBehaviour
         flame1.SetActive(false);
         currentTime = startTime;
         currentFuel = fuel;
-        slider = GameObject.FindGameObjectWithTag("slider").GetComponent<Slider>();
+        currentHP = HP;
+        fuelSlider = GameObject.FindGameObjectWithTag("fuelSlider").GetComponent<Slider>();
+        hpSlider = GameObject.FindGameObjectWithTag("hpSlider").GetComponent<Slider>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
 
@@ -74,10 +79,19 @@ public class player_controller : MonoBehaviour
             safeMode = false;
         }
 
+        if(currentHP >= 0)
+        {
+            hpSlider.value = currentHP;
+        }
+        else
+        {
+            isDead();
+        }
+
         if(currentFuel >= 0)
         {
             currentFuel -= 1 * Time.deltaTime;
-            slider.value = currentFuel;
+            fuelSlider.value = currentFuel;
         }
         else
         {
@@ -90,8 +104,8 @@ public class player_controller : MonoBehaviour
             _acceleration = Input.GetAxis("Vertical");
             _steering = Input.GetAxis("Horizontal");
             flame1.SetActive(_acceleration > 0.5);
-            ThrustForward(_acceleration * AccelerationSpeed);
-            Rotate(transform, _steering * -rotationSpeed);
+            //ThrustForward(_acceleration * AccelerationSpeed);
+            //Rotate(transform, _steering * -rotationSpeed);
             if(_acceleration > 0.5)
             {
                 currentFuel -= 2 * Time.deltaTime;
@@ -137,40 +151,31 @@ public class player_controller : MonoBehaviour
         currentFuel -= fuel;
     }
 
+    public void addHP(float Heal)
+    {
+        currentHP += Heal;
+    }
+
+    public void delHP(float dmg)
+    {
+        currentHP -= dmg;
+    }
+
     private void FixedUpdate()
     {
         if (!dead)
         {
-            //Rigidbody.AddRelativeForce(new Vector2(0, _acceleration * AccelerationSpeed));
-            //Rigidbody.AddTorque(-_steering * SteeringSpeed);
+            Rigidbody.AddRelativeForce(new Vector2(0, _acceleration * AccelerationSpeed));
+            Rigidbody.AddTorque(-_steering * SteeringSpeed);
         }
         exp.transform.position = transform.position;
-    }
-
-    private void ClampVelocity()
-    {
-        float x = Mathf.Clamp(Rigidbody.velocity.x, -maxVelocity, maxVelocity);
-        float y = Mathf.Clamp(Rigidbody.velocity.y, -maxVelocity, maxVelocity);
-        Rigidbody.velocity = new Vector2(x, y);
-    }
-
-    private void ThrustForward(float amount)
-    {
-        Vector2 force = transform.up * amount;
-
-        Rigidbody.AddForce(force);
-    }
-
-    private void Rotate(Transform t, float amount)
-    {
-        t.Rotate(0, 0, amount);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            delFuel(2);
+            delHP(2);
         }
     }
 
@@ -181,7 +186,7 @@ public class player_controller : MonoBehaviour
             if (!safeMode)
             {
                 StartCoroutine(cameraShake.Shake(.15f, GetSpeed() / 25));
-                delFuel(GetSpeed());
+                delHP(GetSpeed());
             }
 
         }

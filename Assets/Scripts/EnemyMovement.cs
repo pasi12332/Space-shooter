@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
     RigidbodyConstraints pos;
     public int scoreValue;
     public gameControll gameController;
+    Spawn_Enemy spawnEnemy;
 
 
     void Start()
@@ -23,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
         if (GameControllerObject != null)
         {
             gameController = GameControllerObject.GetComponent<gameControll>();
+            spawnEnemy = GameControllerObject.GetComponent<Spawn_Enemy>();
         }
         if (gameController == null)
         {
@@ -74,9 +76,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet1"))
         {
-            gameController.AddScore(scoreValue, 2);
-            exp.SetActive(true);
-            Destroy(gameObject);
+            died();
         }
     }
 
@@ -84,8 +84,15 @@ public class EnemyMovement : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Obstacle"))
         {
-            exp.SetActive(true);
-            Destroy(gameObject);
+            
         }
+    }
+
+    void died()
+    {
+        gameController.AddScore(scoreValue, 2);
+        spawnEnemy.nextSpawn += 1;
+        exp.SetActive(true);
+        Destroy(gameObject);
     }
 }
