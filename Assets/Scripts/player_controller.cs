@@ -95,7 +95,7 @@ public class player_controller : MonoBehaviour
         }
         else
         {
-            isDead();
+            delHP(5 * Time.deltaTime);
         }
 
 
@@ -106,7 +106,7 @@ public class player_controller : MonoBehaviour
             flame1.SetActive(_acceleration > 0.5);
             //ThrustForward(_acceleration * AccelerationSpeed);
             //Rotate(transform, _steering * -rotationSpeed);
-            if(_acceleration > 0.5)
+            if(_acceleration > 0.5 && currentFuel >= 0)
             {
                 currentFuel -= 2 * Time.deltaTime;
                 flame1.SetActive(true);
@@ -163,7 +163,7 @@ public class player_controller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!dead)
+        if (!dead && currentFuel >= 0)
         {
             Rigidbody.AddRelativeForce(new Vector2(0, _acceleration * AccelerationSpeed));
             Rigidbody.AddTorque(-_steering * SteeringSpeed);
