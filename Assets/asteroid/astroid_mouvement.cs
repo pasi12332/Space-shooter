@@ -6,8 +6,9 @@ using TMPro;
 
 public class astroid_mouvement : MonoBehaviour
 {
-    public float maxThrust;
+    public float maxThrust = 30f;
     public float maxTorque;
+
     public Rigidbody2D rb;
     public TextMeshProUGUI textDisplay;
     public int scoreValue;
@@ -39,12 +40,18 @@ public class astroid_mouvement : MonoBehaviour
 
     void move()
     {
-        Vector2 thrust = new Vector2(Random.Range(-maxThrust, maxThrust), Random.Range(-maxThrust, maxThrust));
+        Vector2 thrust = new Vector2(Random.Range(4*-maxThrust, 4*maxThrust), Random.Range(4*-maxThrust, 4*maxThrust));
         float torque = Random.Range(-maxTorque, maxTorque);
-
         rb.AddForce(thrust);
         rb.AddTorque(torque);
+
+        //alte version
+        // Vector2 thrust = new Vector2(Random.Range(-maxThrust, maxThrust), Random.Range(-maxThrust, maxThrust));
+        // float torque = Random.Range(-maxTorque, maxTorque);
+        // rb.AddForce(thrust);
+        // rb.AddTorque(torque);
     }
+
     // Update is called once per frame
     void Update()
     {
