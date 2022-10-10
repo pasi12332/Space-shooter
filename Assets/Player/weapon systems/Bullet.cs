@@ -58,14 +58,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Player3"))
-        {
-            Destroy(gameObject);
-        }
-        if (other.gameObject.CompareTag("Player4"))
-        {
-            Destroy(gameObject);
-        }
     }
 
     public int GetDamage()

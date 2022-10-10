@@ -26,10 +26,7 @@ public class EnemyMovement : MonoBehaviour
             gameController = GameControllerObject.GetComponent<gameControll>();
             spawnEnemy = GameControllerObject.GetComponent<Spawn_Enemy>();
         }
-        if (gameController == null)
-        {
-            Debug.Log("Cannot find 'GameController' script");
-        }
+
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }

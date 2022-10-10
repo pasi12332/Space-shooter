@@ -14,7 +14,6 @@ public class gameControll : MonoBehaviourPunCallbacks
     public int Score;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject player;
     public GameObject wholePlayer;
     public int points;
 
@@ -28,7 +27,6 @@ public class gameControll : MonoBehaviourPunCallbacks
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        GameObject playerObject = GameObject.FindWithTag("Player");
         
     }
 
@@ -50,7 +48,7 @@ public class gameControll : MonoBehaviourPunCallbacks
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        player.SetActive(true);
+        //player.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -58,7 +56,7 @@ public class gameControll : MonoBehaviourPunCallbacks
     void Pause()
     {
         pauseMenuUI.SetActive(true);
-        player.SetActive(false);
+        //player.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
@@ -70,6 +68,10 @@ public class gameControll : MonoBehaviourPunCallbacks
 
     public void backMenu()
     {
+        if(GameIsPaused)
+        {
+            Resume();
+        }
         PlayerPrefs.Save();
         SceneManager.LoadScene("SelectSkin");
     }

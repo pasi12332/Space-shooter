@@ -6,24 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/Intro.unity
-    guid: 88ae02292abbbf7448140e893a52a7f0
-  - enabled: 1
-    path: Assets/Game/Scenes/Start.unity
+    path: Assets/game/Scenes/Start.unity
     guid: d17b96fba52fcb24e98ed67751de47c3
   - enabled: 1
     path: Assets/Shop/SelectSkin.unity
     guid: 58ae78c7eb21e2a4a8bc8d72cc3308d4
   - enabled: 1
-    path: Assets/Game/Scenes/Single_Game.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Game/Scenes/Lobby.unity
+    path: Assets/game/Scenes/Lobby.unity
     guid: 1d23984cd61a00f49b04c3a973417d57
   - enabled: 1
-    path: Assets/Game/Muliplayer/MultiPlayer.unity
+    path: Assets/game/Scenes/Single_Game.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/game/Muliplayer/MultiPlayer.unity
     guid: d48b9e8b768958c4dadd81c47b08ef95
   - enabled: 1
-    path: Assets/Game/Scenes/ConnectLobby.unity
+    path: Assets/game/Scenes/ConnectLobby.unity
     guid: ed487e51217bbc4469b58c80699be0c1
   m_configObjects: {}
